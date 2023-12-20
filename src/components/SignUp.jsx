@@ -15,10 +15,31 @@ export default function SignUp() {
     }));
   };
 
-  console.log(signUpData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const existingData = localStorage.getItem("signUpData");
+    if (existingData) {
+      const parsedData = JSON.parse(existingData);
+      if (parsedData.email === signUpData.email) {
+        alert("Email already exists. Please use a different email.");
+        return; // Stop the function if email already exists
+      }
+    }
+
+    if (signUpData.password !== signUpData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    localStorage.setItem("signUpData", JSON.stringify(signUpData));
+    alert("Sign up successful!");
+  };
+
   return (
     <>
       <div>
+        <h1>Sign Up</h1>
         <form>
           <input
             type="text"
@@ -45,7 +66,7 @@ export default function SignUp() {
             value={signUpData.confirmPassword}
             onChange={handleChange}
           />
-          <button type="submit">Sign Up</button>
+          <button onClick={handleSubmit}>Sign Up</button>
         </form>
       </div>
     </>

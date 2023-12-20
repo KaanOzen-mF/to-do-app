@@ -14,12 +14,32 @@ export default function SignIn() {
     }));
   };
 
-  console.log(signInData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const storedData = localStorage.getItem("signUpData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      if (
+        parsedData.email === signInData.email &&
+        parsedData.password === signInData.password
+      ) {
+        alert("Sign in successful");
+        // Further logic for successful sign in
+      } else {
+        alert("Sign in failed: Incorrect email or password");
+        // Logic for failed sign in
+      }
+    } else {
+      alert("No stored data found");
+      // Logic if no data is stored
+    }
+  };
 
   return (
     <>
       <div>
-        <h1>Login Screen</h1>
+        <h1>Sign In</h1>
 
         <form>
           <input
@@ -38,7 +58,9 @@ export default function SignIn() {
             value={signInData.password}
             onChange={handleChange}
           />
-          <button type="submit">Sign in</button>
+          <button type="submit" onClick={handleSubmit}>
+            Sign in
+          </button>
         </form>
       </div>
     </>
