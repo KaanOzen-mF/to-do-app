@@ -1,4 +1,6 @@
 import React from "react";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp() {
   const [signUpData, setsignUpData] = React.useState({
@@ -15,25 +17,25 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const existingData = localStorage.getItem("signUpData");
-    if (existingData) {
-      const parsedData = JSON.parse(existingData);
-      if (parsedData.email === signUpData.email) {
-        alert("Email already exists. Please use a different email.");
-        return; // Stop the function if email already exists
-      }
-    }
 
     if (signUpData.password !== signUpData.confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
 
-    localStorage.setItem("signUpData", JSON.stringify(signUpData));
-    alert("Sign up successful!");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        signUpData.email,
+        signUpData.password
+      );
+      alert("Sign up successful!");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      alert(error.message);
+    }
   };
 
   return (

@@ -1,5 +1,8 @@
 import React from "react";
 
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 export default function SignIn() {
   const [signInData, setsignInData] = React.useState({
     email: "",
@@ -14,25 +17,19 @@ export default function SignIn() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const storedData = localStorage.getItem("signUpData");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      if (
-        parsedData.email === signInData.email &&
-        parsedData.password === signInData.password
-      ) {
-        alert("Sign in successful");
-        // Further logic for successful sign in
-      } else {
-        alert("Sign in failed: Incorrect email or password");
-        // Logic for failed sign in
-      }
-    } else {
-      alert("No stored data found");
-      // Logic if no data is stored
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        signInData.email,
+        signInData.password
+      );
+      alert("Sign in successful!");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      alert(error.message);
     }
   };
 
