@@ -2,7 +2,7 @@ import React from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function SignUp() {
+export default function SignUp({ onSignUpSuccess }) {
   const [signUpData, setsignUpData] = React.useState({
     email: "",
     password: "",
@@ -32,9 +32,13 @@ export default function SignUp() {
         signUpData.password
       );
       alert("Sign up successful!");
+      onSignUpSuccess(); // Call the callback function on successful sign-up
     } catch (error) {
-      console.error("Error signing up:", error);
-      alert(error.message);
+      if (error.code === "auth/email-already-in-use") {
+        alert("Email already in use. Please use a different email.");
+      } else {
+        alert("An error occurred during sign up.");
+      }
     }
   };
 
