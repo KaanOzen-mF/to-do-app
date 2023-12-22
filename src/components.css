@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Karla:wght@300;400;700&family=Reenie+Beanie&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  color: #babbf4;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+.form_element_container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background-color: #29275f;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 8px 12px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.input_container {
+  width: 100%;
+  margin-bottom: 12px;
+  height: 48px;
+  border-radius: 6px;
+  background-color: #babbf4;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 2px 6px 2px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+.input_container::placeholder {
+  color: rgba(41, 39, 95, 0.6);
+  text-transform: capitalize;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.input_container:focus {
+  box-shadow: 2px 6px 2px 0px rgba(0, 0, 0, 0.25) inset;
+  border: none;
+}
+.sign_btn {
+  align-self: center;
+  padding: 12px;
+  border-radius: 36px;
+  background-color: #babbf4;
+  border: none;
+  color: #29275f;
+  font-weight: 900;
+  cursor: pointer;
+  margin: 12px 0;
+  font-size: 24px;
+  box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.reset_password {
+  align-self: self-end;
+}
+
+p {
+  color: #adadad;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+span,
+.reset_password {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 6px;
+  font-weight: 900;
+  color: beige;
+}
+
+/*Modal Components CSS Start*/
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+/*Modal Components CSS End*/
