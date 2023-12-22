@@ -6,6 +6,7 @@
   font-family: "Inter", sans-serif;
 }
 
+/*Sign In and Sign Up components start*/
 .form_container {
   display: flex;
   flex-direction: column;
@@ -19,6 +20,7 @@ h1 {
   margin-bottom: 16px;
   font-size: 20px;
 }
+
 .form_element_container {
   display: flex;
   flex-direction: column;
@@ -57,6 +59,7 @@ h1 {
   box-shadow: 2px 6px 2px 0px rgba(0, 0, 0, 0.25) inset;
   border: none;
 }
+
 .sign_btn {
   align-self: center;
   padding: 12px;
@@ -68,7 +71,12 @@ h1 {
   cursor: pointer;
   margin: 12px 0;
   font-size: 24px;
-  box-shadow: 4px 8px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 4px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.sign_btn:hover {
+  box-shadow: none;
+  transition: 0.5s;
 }
 
 .reset_password {
@@ -79,6 +87,7 @@ p {
   color: #adadad;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 span,
 .reset_password {
   text-decoration: underline;
@@ -87,6 +96,7 @@ span,
   font-weight: 900;
   color: beige;
 }
+/*Sign In and Sign Up components end*/
 
 /*Modal Components CSS Start*/
 .modal-backdrop {
@@ -102,9 +112,25 @@ span,
 }
 
 .modal {
-  background-color: white;
+  background-color: #29275f;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #babbf4;
+}
+
+.modal > button {
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 12px;
+  margin-top: 12px;
+  background-color: #babbf4;
+  font-weight: 600;
+  cursor: pointer;
 }
 /*Modal Components CSS End*/
