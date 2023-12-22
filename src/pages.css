@@ -1,0 +1,14 @@
+/*This CSS file contains css for pages*/
+* {
+  margin: 0;
+  padding: 0;
+}
+/*Login Page Start*/
+.login_page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
+  background: linear-gradient(180deg, #babbf4 0%, #8382a1 100%);
+}
