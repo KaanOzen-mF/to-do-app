@@ -1,13 +1,17 @@
 import React from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Modal from "./Modal";
 
-export default function SignUp({ onSignUpSuccess }) {
+export default function SignUp({ onSignUpSuccess, setActiveView }) {
   const [signUpData, setsignUpData] = React.useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,18 +39,21 @@ export default function SignUp({ onSignUpSuccess }) {
       onSignUpSuccess(); // Call the callback function on successful sign-up
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Email already in use. Please use a different email.");
+        setModalContent("Email already in use. Please use a different email.");
       } else {
-        alert("An error occurred during sign up.");
+        setModalContent("Please write email and/or password");
       }
+      setShowModal(true);
     }
   };
 
+  const handleGoToSignIn = () => {
+    setActiveView("signIn");
+  };
   return (
     <>
-      <div>
-        <h1>Sign Up</h1>
-        <form>
+      <div className="form_container">
+        <form className="form_element_container">
           <input
             type="text"
             name="email"
@@ -54,6 +61,8 @@ export default function SignUp({ onSignUpSuccess }) {
             placeholder="email"
             value={signUpData.email}
             onChange={handleChange}
+            className="input_container"
+            required
           />
           <input
             type="password"
@@ -62,6 +71,8 @@ export default function SignUp({ onSignUpSuccess }) {
             placeholder="password"
             value={signUpData.password}
             onChange={handleChange}
+            className="input_container"
+            required
           />
 
           <input
@@ -71,10 +82,22 @@ export default function SignUp({ onSignUpSuccess }) {
             placeholder="confirm password"
             value={signUpData.confirmPassword}
             onChange={handleChange}
+            className="input_container"
+            required
           />
-          <button onClick={handleSubmit}>Sign Up</button>
+          <button onClick={handleSubmit} className="sign_btn">
+            Sign Up
+          </button>
+
+          <p>
+            Already have an account?
+            <span onClick={handleGoToSignIn}>Sign In now</span>
+          </p>
         </form>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <p>{modalContent}</p>
+      </Modal>
     </>
   );
 }

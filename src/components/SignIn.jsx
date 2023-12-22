@@ -1,19 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { auth } from "../firebase";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   onAuthStateChanged,
 } from "firebase/auth";
+import Modal from "./Modal";
 
-export default function SignIn() {
+export default function SignIn({ setActiveView }) {
   const [signInData, setsignInData] = React.useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate(); // Initialize useNavigate
+
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState("");
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -48,43 +51,47 @@ export default function SignIn() {
       navigate("/todo"); // Navigate to the main todo page on successful sign-in
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
-        alert("Email or password not correct");
+        setModalContent("Email or password not correct");
       } else {
-        alert("An error occurred during sign up.");
+        setModalContent("Please write email and/or password");
       }
+      setShowModal(true);
     }
   };
 
-  const resetPasswordHandler = async (event) => {
-    event.preventDefault();
-
+  const resetPasswordHandler = async () => {
     if (signInData.email === "") {
-      alert("Please enter your email address.");
+      setModalContent("Please enter your email address.");
+      setShowModal(true);
       return;
     }
-
     try {
       await sendPasswordResetEmail(auth, signInData.email);
-      alert("Password reset email sent!");
+      setModalContent("Password reset email sent!");
+      setShowModal(true);
     } catch (error) {
-      console.error("Error sending password reset email:", error);
-      alert("Failed to send password reset email.");
+      setModalContent("Failed to send password reset email.");
+      setShowModal(true);
     }
+  };
+
+  const handleGoToSignUp = () => {
+    setActiveView("signUp");
   };
 
   return (
     <>
-      <div>
-        <h1>Sign In</h1>
-
-        <form>
+      <div className="form_container">
+        <form className="form_element_container">
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             placeholder="email"
             value={signInData.email}
             onChange={handleChange}
+            className="input_container"
+            required
           />
           <input
             type="password"
@@ -93,13 +100,26 @@ export default function SignIn() {
             placeholder="password"
             value={signInData.password}
             onChange={handleChange}
+            className="input_container"
+            required
           />
-          <button type="submit" onClick={handleSubmit}>
-            Sign in
+
+          <p className="reset_password" onClick={resetPasswordHandler}>
+            Forget Password
+          </p>
+
+          <button className="sign_btn" onClick={handleSubmit}>
+            Sign In
           </button>
-          <button onClick={resetPasswordHandler}>forget password</button>
+          <p>
+            Don’t have an account?
+            <span onClick={handleGoToSignUp}>Sign Up now</span>
+          </p>
         </form>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <p>{modalContent}</p>
+      </Modal>
     </>
   );
 }

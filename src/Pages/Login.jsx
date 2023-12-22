@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import "../pages.css";
+import "../components.css";
 
 export default function Login() {
   const [activeView, setActiveView] = useState("signIn");
@@ -10,15 +12,14 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <button onClick={() => setActiveView("signIn")}>Sign In</button>
-      <button onClick={() => setActiveView("signUp")}>Sign Up</button>
-
+    <div className="login_page">
       {activeView === "signIn" ? (
-        <SignIn />
+        <SignIn setActiveView={setActiveView} />
       ) : (
-        <SignUp onSignUpSuccess={handleSignUpSuccess} />
+        <SignUp
+          setActiveView={setActiveView}
+          onSignUpSuccess={handleSignUpSuccess}
+        />
       )}
     </div>
   );
