@@ -19,6 +19,15 @@ export default function InputField({
         ))}
       </select>
     );
+  } else if (type === "textarea") {
+    return (
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      ></textarea>
+    );
   } else {
     return (
       <input
