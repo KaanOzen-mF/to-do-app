@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import "../pages.css";
-import "../components.css";
+import "../Pages.css";
+import "../Components.css";
 
 export default function Login() {
   const [activeView, setActiveView] = useState("signIn");
