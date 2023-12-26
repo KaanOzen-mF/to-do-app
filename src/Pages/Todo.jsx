@@ -10,6 +10,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import LogoutButton from "../components/Logout";
 import InputField from "../components/InputField";
+import "../Todo.css";
 
 const categoryOptions = [
   { value: "personal", label: "Personal" },
@@ -95,52 +96,57 @@ export default function Todo() {
   };
 
   return (
-    <>
+    <div className="todo_page">
       <div>
-        <h1>Todo App</h1>
-        <InputField
-          type="text"
-          name="text"
-          value={newTaskDetails.text}
-          onChange={handleChange}
-          placeholder="Add a new task"
-          required
-        />
-        <InputField
-          type="date"
-          name="deadline"
-          value={newTaskDetails.deadline}
-          onChange={handleChange}
-        />
+        <div className="todo_page_header">
+          <h1>Todo App</h1>
 
-        <InputField
-          type="select"
-          name="category"
-          value={newTaskDetails.category}
-          onChange={handleChange}
-          options={categoryOptions}
-          placeholder="Select category"
-        />
+          <LogoutButton />
+        </div>
+        <div className="todo_page_input_container">
+          <InputField
+            type="text"
+            name="text"
+            value={newTaskDetails.text}
+            onChange={handleChange}
+            placeholder="Add a new task"
+            required
+          />
+          <InputField
+            type="date"
+            name="deadline"
+            value={newTaskDetails.deadline}
+            onChange={handleChange}
+          />
 
-        <InputField
-          type="text"
-          name="details"
-          value={newTaskDetails.details}
-          onChange={handleChange}
-          placeholder="details"
-        />
+          <InputField
+            type="textarea"
+            name="details"
+            value={newTaskDetails.details}
+            onChange={handleChange}
+            placeholder="details"
+          />
 
-        <InputField
-          type="select"
-          name="priority"
-          value={newTaskDetails.priority}
-          onChange={handleChange}
-          options={priorityOption}
-          placeholder="Select priority"
-        />
+          <InputField
+            type="select"
+            name="category"
+            value={newTaskDetails.category}
+            onChange={handleChange}
+            options={categoryOptions}
+            placeholder="Select category"
+          />
 
-        <button onClick={handleAddTask}>Add Task</button>
+          <InputField
+            type="select"
+            name="priority"
+            value={newTaskDetails.priority}
+            onChange={handleChange}
+            options={priorityOption}
+            placeholder="Select priority"
+          />
 
+          <button onClick={handleAddTask}>Add Task</button>
+        </div>
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>
@@ -155,7 +161,6 @@ export default function Todo() {
           ))}
         </ul>
       </div>
-      <LogoutButton />
-    </>
+    </div>
   );
 }
