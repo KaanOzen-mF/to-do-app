@@ -17,6 +17,12 @@ const categoryOptions = [
   // ... other categories ...
 ];
 
+const priorityOption = [
+  { value: "Important", label: "1" },
+  { value: "Not Importanan", label: "0" },
+  // ... other categories ...
+];
+
 export default function Todo() {
   const [tasks, setTasks] = useState([]);
   const [newTaskDetails, setNewTaskDetails] = useState({
@@ -47,7 +53,7 @@ export default function Todo() {
 
   const loadTasks = async (userId) => {
     const querySnapshot = await getDocs(
-      collection(db, "tasks", userId, "userTasks")
+      collection(db, "tasks", userId, `${userId} tasks`)
     );
     setTasks(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
   };
@@ -98,6 +104,7 @@ export default function Todo() {
           value={newTaskDetails.text}
           onChange={handleChange}
           placeholder="Add a new task"
+          required
         />
         <InputField
           type="date"
@@ -124,11 +131,12 @@ export default function Todo() {
         />
 
         <InputField
-          type="text"
+          type="select"
           name="priority"
           value={newTaskDetails.priority}
           onChange={handleChange}
-          placeholder="priority"
+          options={priorityOption}
+          placeholder="Select priority"
         />
 
         <button onClick={handleAddTask}>Add Task</button>
