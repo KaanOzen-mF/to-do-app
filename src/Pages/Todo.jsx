@@ -11,6 +11,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import LogoutButton from "../components/Logout";
 import InputField from "../components/InputField";
 
+const categoryOptions = [
+  { value: "personal", label: "Personal" },
+  { value: "work", label: "Work" },
+  // ... other categories ...
+];
+
 export default function Todo() {
   const [tasks, setTasks] = useState([]);
   const [newTaskDetails, setNewTaskDetails] = useState({
@@ -52,8 +58,19 @@ export default function Todo() {
         ...newTaskDetails,
         userId: user.uid,
       };
-      await addDoc(collection(db, "tasks", user.uid, "userTasks"), taskData);
-      setTasks([...tasks, { ...taskData }]);
+
+      const docRef = await addDoc(
+        collection(db, "tasks", user.uid, "userTasks"),
+        taskData
+      );
+
+      const newTaskWithId = {
+        ...taskData,
+        id: docRef.id,
+      };
+
+      setTasks([...tasks, newTaskWithId]);
+
       setNewTaskDetails({
         text: "",
         deadline: "",
@@ -70,6 +87,7 @@ export default function Todo() {
       setTasks(tasks.filter((task) => task.id !== taskId));
     }
   };
+
   return (
     <>
       <div>
@@ -89,12 +107,14 @@ export default function Todo() {
         />
 
         <InputField
-          type="text"
+          type="select"
           name="category"
           value={newTaskDetails.category}
           onChange={handleChange}
-          placeholder="category"
+          options={categoryOptions}
+          placeholder="Select category"
         />
+
         <InputField
           type="text"
           name="details"
@@ -116,6 +136,7 @@ export default function Todo() {
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>
+              <p>{task.id}</p>
               <p>Task: {task.text}</p>
               <p>Deadline: {task.deadline}</p>
               <p>Category: {task.category}</p>
