@@ -134,3 +134,17 @@ span,
   cursor: pointer;
 }
 /*Modal Components CSS End*/
+
+.logout_btn_container {
+  align-self: center;
+  padding: 12px;
+  border-radius: 36px;
+  background-color: #babbf4;
+  border: none;
+  color: #29275f;
+  font-weight: 900;
+  cursor: pointer;
+  margin: 12px 0;
+  font-size: 24px;
+  box-shadow: 2px 4px 3px 0px rgba(0, 0, 0, 0.75);
+}
