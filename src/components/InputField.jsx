@@ -5,15 +5,29 @@ export default function InputField({
   name,
   value,
   onChange,
+  options,
   placeholder,
 }) {
-  return (
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-    />
-  );
+  if (type === "select") {
+    return (
+      <select name={name} value={value} onChange={onChange}>
+        <option value="">{placeholder}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    );
+  } else {
+    return (
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    );
+  }
 }
