@@ -84,14 +84,15 @@
 }
 
 .todo_details_input {
-  height: 150px; /* Set a fixed height */
   resize: none; /* Prevent resizing */
-  overflow-y: auto; /* Allow vertical scrolling */
   padding: 8px;
   background-color: #babbf4;
   color: #26236b;
   font-size: 16px;
   font-weight: 500;
+  width: 510px; /* Full width of the parent container */
+  height: 120px; /* Fixed maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .todo_page_select_container {
@@ -121,31 +122,39 @@
 }
 
 .todo_card {
+  width: 510px;
   display: flex;
-  width: 100%;
+  flex-direction: column; /* Stack the content vertically */
   margin-top: 12px;
+  align-self: center;
 }
 
 .todo_card_container {
-  width: 90%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .todo_card > ul {
-  margin-top: 12px;
+  width: 100%;
   background-color: #babbf4;
+  padding: 0;
+  margin: 0;
 }
 
 .todo_card > li {
   padding: 12px;
-  margin-bottom: 12px;
-  list-style: none;
-  width: 100%;
   background-color: #26236b;
   box-shadow: 8px 12px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   font-size: 16px;
   line-height: 1.5;
+  color: #fff;
+  list-style: none;
 }
+
 .todo_delete_btn {
   margin-top: 12px;
 }
