@@ -12,3 +12,140 @@
   height: 100vh; /* Adjust the height as needed */
   background: linear-gradient(180deg, #babbf4 0%, #8382a1 100%);
 }
+/*Login Page End*/
+
+.todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #26236b;
+  min-height: 100vh;
+}
+
+.todo_page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #8382a1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 8px 12px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  padding-bottom: 12px;
+  margin: 16px 0;
+}
+
+.todo_page_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.todo_page_header > h1 {
+  margin: 0; /* Remove any default margin */
+  font-size: 24px;
+}
+
+.todo_page_input_container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.todo_page_header,
+.todo_page_input_container {
+  flex-shrink: 0;
+}
+
+.todo_page_task_date_container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+}
+
+.todo_text_input {
+  border: 1px solid #ccc; /* Example: change border color */
+  padding: 8px; /* Example: add padding */
+  border-radius: 4px; /* Example: round the corners */
+  width: 420px;
+  margin-right: 6px;
+  background-color: #babbf4;
+  color: #26236b;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.todo_date_input {
+  border: 1px solid #ccc; /* Example: change border color */
+  border-radius: 4px;
+  background-color: #babbf4;
+  font-size: 16px;
+}
+
+.todo_details_input {
+  height: 150px; /* Set a fixed height */
+  resize: none; /* Prevent resizing */
+  overflow-y: auto; /* Allow vertical scrolling */
+  padding: 8px;
+  background-color: #babbf4;
+  color: #26236b;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.todo_page_select_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 12px 0;
+  width: 100%;
+}
+
+.add_task_btn {
+  align-self: center;
+  margin-bottom: 12px;
+}
+
+.add_task_btn,
+.select_btn,
+.todo_delete_btn {
+  border-radius: 6px;
+  border: none;
+  background-color: #babbf4;
+  color: #26236b;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 12px;
+}
+
+.todo_card {
+  display: flex;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.todo_card_container {
+  width: 90%;
+}
+
+.todo_card > ul {
+  margin-top: 12px;
+  background-color: #babbf4;
+}
+
+.todo_card > li {
+  padding: 12px;
+  margin-bottom: 12px;
+  list-style: none;
+  width: 100%;
+  background-color: #26236b;
+  box-shadow: 8px 12px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.todo_delete_btn {
+  margin-top: 12px;
+}
