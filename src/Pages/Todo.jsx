@@ -12,23 +12,23 @@ import LogoutButton from "../components/Logout";
 import InputField from "../components/InputField";
 
 const categoryOptions = [
-  { value: "personal", label: "Personal" },
-  { value: "work", label: "Work" },
-  { value: "health", label: "Health" },
-  { value: "shopping", label: "Shopping" },
-  { value: "finance", label: "Finance" },
-  { value: "education", label: "Education" },
-  { value: "home", label: "Home" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "travel", label: "Travel" },
-  { value: "other", label: "Other" },
+  { value: "👤 Personal", label: "👤 Personal" },
+  { value: "💼 Work", label: "💼 Work" },
+  { value: "💪 Health", label: "💪 Health" },
+  { value: "🛍️ Shopping", label: "🛍️ Shopping" },
+  { value: "💰 Finance", label: "💰 Finance" },
+  { value: "📚 Education", label: "📚 Education" },
+  { value: "🏠 Home", label: "🏠 Home" },
+  { value: "🎉 Entertainment", label: "🎉 Entertainment" },
+  { value: "✈️ Travel", label: "✈️ Travel" },
+  { value: "🔖 Other", label: "🔖 Other" },
 ];
 
 const priorityOptions = [
-  { value: "high", label: "High Priority", color: "#FF6347" }, // Tomato red for high urgency
-  { value: "medium", label: "Medium Priority", color: "#FFD700" }, // Gold for medium importance
-  { value: "low", label: "Low Priority", color: "#90EE90" }, // Light green for lower urgency
-  { value: "none", label: "No Priority", color: "#D3D3D3" }, // Light grey for no urgency
+  { value: "High", label: "High Priority", color: "#FF6347" }, // Tomato red for high urgency
+  { value: "Medium", label: "Medium Priority", color: "#FFD700" }, // Gold for medium importance
+  { value: "Low", label: "Low Priority", color: "#90EE90" }, // Light green for lower urgency
+  { value: "None", label: "No Priority", color: "#D3D3D3" }, // Light grey for no urgency
 ];
 
 export default function Todo() {
@@ -100,6 +100,13 @@ export default function Todo() {
       await deleteDoc(doc(db, "tasks", user.uid, "userTasks", taskId));
       setTasks(tasks.filter((task) => task.id !== taskId));
     }
+  };
+
+  const getPriorityColor = (priorityValue) => {
+    const priorityObj = priorityOptions.find(
+      (option) => option.value === priorityValue
+    );
+    return priorityObj ? priorityObj.color : "#000"; // default to black if not found
   };
 
   return (
@@ -175,7 +182,9 @@ export default function Todo() {
                   <p>Deadline: {task.deadline}</p>
                   <p>Category: {task.category}</p>
                   <p>Details: {task.details}</p>
-                  <p>Priority: {task.priority}</p>
+                  <p style={{ color: getPriorityColor(task.priority) }}>
+                    Priority: {task.priority}
+                  </p>
                   <button
                     onClick={() => handleDelete(task.id)}
                     className="todo_delete_btn"
