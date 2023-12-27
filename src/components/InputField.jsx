@@ -7,10 +7,16 @@ export default function InputField({
   onChange,
   options,
   placeholder,
+  className,
 }) {
   if (type === "select") {
     return (
-      <select name={name} value={value} onChange={onChange}>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={className}
+      >
         <option value="">{placeholder}</option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
@@ -26,6 +32,7 @@ export default function InputField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        className={className}
       ></textarea>
     );
   } else {
@@ -36,6 +43,7 @@ export default function InputField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        className={className}
       />
     );
   }
