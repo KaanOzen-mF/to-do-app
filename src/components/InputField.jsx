@@ -34,7 +34,7 @@ export default function InputField({
         value={value}
         onChange={onChange}
         className={className}
-        min={min} // Add the min attribute
+        min={min}
       />
     );
   } else if (type === "textarea") {
