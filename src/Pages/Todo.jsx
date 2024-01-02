@@ -41,6 +41,8 @@ export default function Todo() {
     priority: "",
   });
   const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,6 +101,8 @@ export default function Todo() {
     if (user) {
       await deleteDoc(doc(db, "tasks", user.uid, "userTasks", taskId));
       setTasks(tasks.filter((task) => task.id !== taskId));
+      showModal(true);
+      setModalContent("Task is deleted");
     }
   };
 
@@ -179,22 +183,29 @@ export default function Todo() {
         <div className="todo_card_container">
           <ul>
             {tasks.map((task) => (
-              <div className="todo_card">
+              <div className="todo_card" onClick={() => handleDelete(task.id)}>
                 <li key={task.id}>
                   <p>Task: {task.text}</p>
-                  <p>Deadline: {task.deadline}</p>
-                  <p>Category: {task.category}</p>
-                  <p>Details: {task.details}</p>
-                  <p style={{ color: getPriorityColor(task.priority) }}>
-                    Priority: {task.priority}
-                  </p>
-                  <button
-                    onClick={() => handleDelete(task.id)}
-                    className="todo_delete_btn"
-                  >
-                    Delete
-                  </button>
+
+                  {task.deadline.length !== 0 && (
+                    <p>Deadline: {task.deadline}</p>
+                  )}
+                  {task.category.length !== 0 && (
+                    <p>Category: {task.category}</p>
+                  )}
+                  {task.details.length !== 0 && <p>Details: {task.details}</p>}
+                  {task.priority.length !== 0 && (
+                    <p style={{ color: getPriorityColor(task.priority) }}>
+                      Priority: {task.priority}
+                    </p>
+                  )}
                 </li>
+                <button
+                  onClick={() => handleDelete(task.id)}
+                  className="todo_delete_btn"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </ul>

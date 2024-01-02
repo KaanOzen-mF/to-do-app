@@ -47,7 +47,6 @@ export default function SignIn({ setActiveView }) {
         signInData.email,
         signInData.password
       );
-      alert("Sign in successful!");
       navigate("/todo"); // Navigate to the main todo page on successful sign-in
     } catch (error) {
       if (error.code === "auth/invalid-credential") {

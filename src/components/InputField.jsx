@@ -57,6 +57,7 @@ export default function InputField({
         placeholder={placeholder}
         className={className}
         min={min}
+        autoComplete="off"
       />
     );
   }
