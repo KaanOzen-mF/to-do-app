@@ -8,6 +8,7 @@ export default function InputField({
   options,
   placeholder,
   className,
+  min,
 }) {
   if (type === "select") {
     return (
@@ -24,6 +25,17 @@ export default function InputField({
           </option>
         ))}
       </select>
+    );
+  } else if (type === "date") {
+    return (
+      <input
+        type="date"
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={className}
+        min={min} // Add the min attribute
+      />
     );
   } else if (type === "textarea") {
     return (
@@ -44,6 +56,7 @@ export default function InputField({
         onChange={onChange}
         placeholder={placeholder}
         className={className}
+        min={min}
       />
     );
   }
