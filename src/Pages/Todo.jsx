@@ -109,6 +109,8 @@ export default function Todo() {
     return priorityObj ? priorityObj.color : "#000"; // default to black if not found
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <div className="todo">
       <div className="todo_page">
@@ -133,6 +135,7 @@ export default function Todo() {
               value={newTaskDetails.deadline}
               onChange={handleChange}
               className="todo_date_input"
+              min={today}
             />
           </div>
 
