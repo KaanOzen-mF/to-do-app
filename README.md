@@ -1,8 +1,42 @@
-# React + Vite
+# To-Do App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This to-do app is a simple yet powerful tool designed to help users manage their daily tasks effectively. With features like task creation, categorization, and prioritization, it ensures a smooth and intuitive task management experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- User Registration and Login
+- Task Creation with detailed descriptions
+- Deadline setting for tasks
+- Task Categorization/Tagging
+- Task Prioritization
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- Any modern web browse
+- Firebase
+
+### Installation
+
+1. Clone the repository:
+   git clone https://github.com/KaanOzen-mF/todo-app.git
+
+2. Navigate to the project directory:
+   cd todo-app
+
+3. Install dependencies:
+   npm install
+
+### Usage
+
+After starting the server, navigate to `http://localhost:` in your web browser to use the app.
+
+## Contact
+
+Your Name - [kaanozn98@gmail.com](mailto:kaanozn98@gmail.com)
+
+Project Link: [https://github.com/KaanOzen-mF/todo-app](https://github.com/KaanOzen-mF/todo-app)
