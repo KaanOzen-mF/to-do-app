@@ -208,9 +208,11 @@ export default function Todo() {
             />
           </div>
 
-          <button onClick={handleAddTask} className="add_task_btn">
-            Add Task
-          </button>
+          <div className="todo_page_add_task_btn_container">
+            <button onClick={handleAddTask} className="add_task_btn">
+              Add Task
+            </button>
+          </div>
 
           <hr />
         </div>
