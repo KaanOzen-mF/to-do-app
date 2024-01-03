@@ -1,15 +1,17 @@
 import React from "react";
 
+// The InputField component is a reusable input component that supports different input types.
 export default function InputField({
-  type,
-  name,
-  value,
-  onChange,
-  options,
-  placeholder,
-  className,
-  min,
+  type, // Input type (e.g., 'text', 'date', 'select', 'textarea')
+  name, // Name attribute for the input
+  value, // Current value of the input
+  onChange, // Function to call when the input's value changes
+  options, // Options for the select input type
+  placeholder, // Placeholder text for the input
+  className, // CSS class names for styling the input
+  min, // Minimum value for date input types
 }) {
+  // Renders a select input if the type is 'select'
   if (type === "select") {
     return (
       <select
@@ -26,7 +28,9 @@ export default function InputField({
         ))}
       </select>
     );
-  } else if (type === "date") {
+  }
+  // Renders a date input if the type is 'date'
+  else if (type === "date") {
     return (
       <input
         type="date"
@@ -37,7 +41,9 @@ export default function InputField({
         min={min}
       />
     );
-  } else if (type === "textarea") {
+  }
+  // Renders a textarea if the type is 'textarea'
+  else if (type === "textarea") {
     return (
       <textarea
         name={name}
@@ -47,7 +53,9 @@ export default function InputField({
         className={className}
       ></textarea>
     );
-  } else {
+  }
+  // For other types, renders a standard input field
+  else {
     return (
       <input
         type={type}
@@ -57,7 +65,7 @@ export default function InputField({
         placeholder={placeholder}
         className={className}
         min={min}
-        autoComplete="off"
+        autoComplete="off" // Disables autocomplete for the input
       />
     );
   }
