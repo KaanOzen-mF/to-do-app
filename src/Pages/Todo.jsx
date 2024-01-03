@@ -11,6 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import LogoutButton from "../components/Logout";
 import InputField from "../components/InputField";
 
+// Predefined options for categories and priorities
+
 const categoryOptions = [
   { value: "👤 Personal", label: "👤 Personal" },
   { value: "💼 Work", label: "💼 Work" },
@@ -32,6 +34,7 @@ const priorityOptions = [
 ];
 
 export default function Todo() {
+  // State for managing tasks and task details
   const [tasks, setTasks] = useState([]);
   const [newTaskDetails, setNewTaskDetails] = useState({
     text: "",
@@ -40,15 +43,21 @@ export default function Todo() {
     category: "",
     priority: "",
   });
+
+  // State for managing user authentication
   const [user, setUser] = useState(null);
+
+  // State for managing modal visibility and content
   const [showModal, setShowModal] = React.useState(false);
   const [modalContent, setModalContent] = React.useState("");
 
+  // Handle changes in input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewTaskDetails((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  // Monitor authentication state and load tasks for the authenticated user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -61,13 +70,21 @@ export default function Todo() {
     return unsubscribe;
   }, []);
 
+  // Load tasks from the database for the authenticated user
   const loadTasks = async (userId) => {
     const querySnapshot = await getDocs(
       collection(db, "tasks", userId, "userTasks")
     );
-    setTasks(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    setTasks(
+      querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        completed: false,
+      }))
+    );
   };
 
+  // Handle adding a new task
   const handleAddTask = async () => {
     if (user && newTaskDetails.text.trim() !== "") {
       const taskData = {
@@ -97,15 +114,28 @@ export default function Todo() {
     }
   };
 
-  const handleDelete = async (taskId) => {
+  // Handle deleting a task
+  const handleDelete = async (taskId, event) => {
+    event.stopPropagation(); // Prevent event from bubbling to parent elements
+
     if (user) {
       await deleteDoc(doc(db, "tasks", user.uid, "userTasks", taskId));
       setTasks(tasks.filter((task) => task.id !== taskId));
-      showModal(true);
+      setShowModal(true); // Show deletion confirmation modal
       setModalContent("Task is deleted");
     }
   };
 
+  // Handle card click to toggle task completion status
+  const handleCardClick = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((t) =>
+        t.id === taskId ? { ...t, completed: !t.completed } : t
+      )
+    );
+  };
+
+  // Helper function to determine priority color
   const getPriorityColor = (priorityValue) => {
     const priorityObj = priorityOptions.find(
       (option) => option.value === priorityValue
@@ -115,14 +145,18 @@ export default function Todo() {
 
   const today = new Date().toISOString().split("T")[0];
 
+  // Render the Todo component
   return (
     <div className="todo">
+      {/* Todo app header and main content */}
       <div className="todo_page">
+        {/* Task header content */}
         <div className="todo_page_header">
           <h1>Todo App</h1>
 
           <LogoutButton />
         </div>
+        {/* Task input fields */}
         <div className="todo_page_input_container">
           <div className="todo_page_task_date_container">
             <InputField
@@ -180,10 +214,15 @@ export default function Todo() {
 
           <hr />
         </div>
+        {/* Task list */}
         <div className="todo_card_container">
           <ul>
             {tasks.map((task) => (
-              <div className="todo_card" onClick={() => handleDelete(task.id)}>
+              <div
+                className={`todo_card ${task.completed ? "completed" : ""}`}
+                key={task.id}
+                onClick={() => handleCardClick(task.id)}
+              >
                 <li key={task.id}>
                   <p>Task: {task.text}</p>
 
@@ -201,7 +240,7 @@ export default function Todo() {
                   )}
                 </li>
                 <button
-                  onClick={() => handleDelete(task.id)}
+                  onClick={(e) => handleDelete(task.id, e)}
                   className="todo_delete_btn"
                 >
                   Delete
@@ -211,6 +250,13 @@ export default function Todo() {
           </ul>
         </div>
       </div>
+      {/* Modal for messages */}
+      {showModal && (
+        <div className="modal">
+          <p>{modalContent}</p>
+          <button onClick={() => setShowModal(false)}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
