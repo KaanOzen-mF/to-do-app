@@ -45,7 +45,6 @@ export default function SignUp({ onSignUpSuccess, setActiveView }) {
         signUpData.email,
         signUpData.password
       );
-      alert("Sign up successful!");
       onSignUpSuccess(); // Invoke callback function on successful sign-up
     } catch (error) {
       // Display errors as modal content based on the type of error
