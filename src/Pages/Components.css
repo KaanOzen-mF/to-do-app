@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Karla:wght@300;400;700&family=Reenie+Beanie&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+/*Sign In and Sign Up components start*/
+.form_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  color: #babbf4;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.form_element_container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background-color: #60575d;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 8px 12px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.input_container {
+  width: 100%;
+  margin-bottom: 12px;
+  height: 48px;
+  border-radius: 6px;
+  background-color: #eef0f2;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 2px 6px 2px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+.input_container::placeholder {
+  color: rgba(41, 39, 95, 0.6);
+  text-transform: capitalize;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.input_container:focus {
+  box-shadow: 2px 6px 2px 0px rgba(0, 0, 0, 0.25) inset;
+  border: none;
+  background-color: #2d608b;
+  color: white;
+  transition: 0.4s;
+}
+
+.sign_btn {
+  align-self: center;
+  padding: 12px;
+  border-radius: 36px;
+  background-color: #2d608b;
+
+  font-weight: 900;
+  cursor: pointer;
+  margin: 12px 0;
+  font-size: 24px;
+  box-shadow: 2px 4px 3px 0px rgba(0, 0, 0, 0.75);
+
+  color: #eef0f2;
+  border: 2px solid #eef0f2;
+}
+
+.sign_btn:hover {
+  box-shadow: none;
+  transition: 0.5s;
+  background-color: #4e4c8d;
+  color: white;
+}
+
+.reset_password {
+  align-self: self-end;
+}
+
+.reset_password:hover,
+span:hover {
+  color: #eef0f2;
+}
+
+p {
+  color: #adadad;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+span,
+.reset_password {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 6px;
+  font-weight: 900;
+  color: beige;
+}
+/*Sign In and Sign Up components end*/
+
+/*Modal Components CSS Start*/
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.modal p {
+  margin: 0 0 20px 0;
+}
+
+.modal > button {
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 12px;
+  margin-top: 12px;
+  background-color: #babbf4;
+  font-weight: 600;
+  cursor: pointer;
+}
+/*Modal Components CSS End*/
+
+.logout_btn_container {
+  padding: 12px;
+  border-radius: 36px;
+  background-color: #2d608b;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 12px 0;
+  font-size: 16px;
+  color: #eef0f2;
+  border: 2px solid #eef0f2;
+}
+
+.logout_btn_container:hover {
+  background-color: #c5283d;
+  color: white;
+  transition: 0.6s;
+}
+
+/*Responsive Design Start*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .form_element_container {
+    width: 75%;
+    padding: 24px;
+  }
+
+  p,
+  span,
+  .reset_password,
+  .input_container::placeholder,
+  .input_container,
+  .sign_btn {
+    font-size: 16px;
+  }
+}
+/*Responsive Design End*/

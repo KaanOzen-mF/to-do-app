@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import "../Pages.css";
-import "../Components.css";
+import "./Pages.css";
+import "./Components.css";
 
 // Login component manages the authentication views for SignIn and SignUp
 export default function Login() {
